@@ -1,11 +1,18 @@
 <script>
     import PriceModal from "../components/PriceModal.svelte";
     let showmodal = false;
+    function toggleModal() {
+        showmodal = !showmodal;
+    }
+    let pricecallback = (a) => {
+        console.log(a)
+        toggleModal();
+    }
 </script>
 
 <main>
     {#if showmodal}
-        <PriceModal />
+        <PriceModal {toggleModal} {pricecallback}/>
     {/if}
     <div class="container">
         <div class="row" style="background-color: #DADADA;border-bottom: 2px solid black;">
@@ -40,6 +47,11 @@
 </main>
 
 <style>
+    main {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+    }
     .container {
         width: 50%;
         height: 100%;
