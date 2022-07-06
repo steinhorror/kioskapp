@@ -1,5 +1,4 @@
 <script>
-	export let toggleModal;
 	export let pricecallback;
 
 	let preis = "0";
@@ -46,7 +45,7 @@
 			/>
 		</svg>
 		<svg
-			on:click={() => toggleModal()}
+			on:click={() => pricecallback("none")}
 			style="left: 30vw;position: absolute;border-radius: 50%;top: 46px;"
 			width="128"
 			height="128"

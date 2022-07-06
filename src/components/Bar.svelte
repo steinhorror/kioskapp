@@ -24,7 +24,7 @@
     <div class="bar">
         <div class="baricons">
             <i on:click={setPage("home")} id="home" class="bi bi-house-fill" />
-            <i id="shutdown" class="bi bi-power" />
+            <i on:click={() => fetch("http://" + location.host + "/api/shutdown")} id="shutdown" class="bi bi-power" />
         </div>
         <span class="time">{time}</span>
     </div>

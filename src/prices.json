@@ -1,0 +1,51 @@
+{
+    "Snacks": {
+        "Kinder Bueno": "0,9",
+        "Oreo": "0,8",
+        "Twix": "0,8",
+        "Snickers": "0,8",
+        "KitKat": "0,6",
+        "Duplo": "0,6",
+        "Hanuta": "0,6",
+        "Knoppers Riegel": "0,6",
+        "Knoppers": "0,6",
+        "Milchschnitte": "0,5",
+        "Kinder Pingui": "0,5",
+        "Pick Up Dark": "0,5",
+        "Pick Up Normal": "0,5",
+        "Corny Riegel": "0,5",
+        "Lolli": "0,2"
+    },
+    "Getränke": {
+        "Iso Sport": "1,25",
+        "Apfelschorle": "1",
+        "Wasser": "0,75",
+        "Solevita": "0,5"
+    },
+    "Schreibwaren": {
+        "Block": "1,5",
+        "Doppelbögen": "0,19",
+        "Heft": "0,70",
+        "Post-it": "1,8",
+        "Textmarker": "0,8",
+        "Flipchartmarker": "1,5",
+        "Bleistift": "0,3",
+        "Kugelschreiber": "0,6",
+        "Gelwriter": "2,5",
+        "Frixion": "3",
+        "Tintenkiller": "0,8",
+        "Lamy Patronen": "2,2",
+        "Pelikan Patronen": "0,3",
+        "Schnellhefter": "0,5",
+        "Sammelmappe": "0,7",
+        "Spitzer": "0,6",
+        "Radierer": "0,5",
+        "Geodreieck": "1",
+        "Flachlocher": "2,5",
+        "Lineal": "1",
+        "Klebestift": "1,8",
+        "Schere": "2,5",
+        "Tipp-Ex-Roller": "3,5",
+        "Tipp-Ex-Refill": "2,5"
+    }
+}
