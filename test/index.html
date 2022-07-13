@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        video {
+            position: absolute;
+            top: -100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: space-between;
+        }
+
+        #capture {
+            height: 10vh;
+        }
+    </style>
+</head>
+
+<body>
+    <video id="player" autoplay></video>
+    <canvas id="canv" width="320" height="240"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+    <script>
+        let player = document.getElementById("player");
+        let canvas = document.getElementById("canv");
+        let ctx = canvas.getContext("2d");
+        let captureloc = undefined;
+
+        // window.onblur = () => player.srcObject.getVideoTracks().forEach(track => track.stop());
+        let constraints = {
+            video: {
+                facingMode: {
+                    exact: "environment"
+                }
+            }
+        };
+        constraints.video = navigator.userAgent.toLowerCase().includes("mobile") ? { facingMode: { exact: "environment" } } : {}
+        navigator.mediaDevices.getUserMedia(constraints).then(stream => {
+            player.srcObject = stream;
+            console.log("hello")
+            Quagga.init({
+                inputStream: {
+                    target: player
+                },
+                decoder: {
+                    multiple: false,
+                    readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader", "2of5_reader", "code_93_reader"]
+                }
+            }, (err) => {
+                if(err) return console.log(err)
+                console.log("hello 2")
+                Quagga.start()
+            })
+        })
+        Quagga.onDetected((d) => {
+            alert(d.codeResult.code)
+            player.srcObject.getVideoTracks().forEach(track => track.stop());
+        })
+
+        setInterval(() => {
+            canvas.width = player.getBoundingClientRect().width;
+            canvas.height = player.getBoundingClientRect().height;
+
+            ctx.drawImage(player, 0, 0, canvas.width, canvas.height);
+            if (captureloc == undefined) {
+                ctx.fillStyle = `rgba(0, 0, 0, .5)`
+                ctx.beginPath()
+                ctx.moveTo(canvas.width / 8, canvas.height / 4)
+                ctx.lineTo(canvas.width / 8, canvas.height / 8)
+                ctx.lineTo(canvas.width / 4, canvas.height / 8)
+                ctx.lineTo(canvas.width / 8, canvas.height / 8)
+                ctx.closePath();
+                ctx.stroke();
+
+                ctx.beginPath()
+                ctx.moveTo(canvas.width - canvas.width / 8, canvas.height / 4)
+                ctx.lineTo(canvas.width - canvas.width / 8, canvas.height / 8)
+                ctx.lineTo(canvas.width - canvas.width / 4, canvas.height / 8)
+                ctx.lineTo(canvas.width - canvas.width / 8, canvas.height / 8)
+                ctx.closePath();
+                ctx.stroke();
+
+                ctx.beginPath()
+                ctx.moveTo(canvas.width / 8, canvas.height - canvas.height / 4)
+                ctx.lineTo(canvas.width / 8, canvas.height - canvas.height / 8)
+                ctx.lineTo(canvas.width / 4, canvas.height - canvas.height / 8)
+                ctx.lineTo(canvas.width / 8, canvas.height - canvas.height / 8)
+                ctx.closePath();
+                ctx.stroke();
+
+                ctx.beginPath()
+                ctx.moveTo(canvas.width - canvas.width / 8, canvas.height - canvas.height / 4)
+                ctx.lineTo(canvas.width - canvas.width / 8, canvas.height - canvas.height / 8)
+                ctx.lineTo(canvas.width - canvas.width / 4, canvas.height - canvas.height / 8)
+                ctx.lineTo(canvas.width - canvas.width / 8, canvas.height - canvas.height / 8)
+                ctx.closePath();
+                ctx.stroke();
+            } else {
+                ctx.fillStyle = "rgb(255, 0, 0)"
+                ctx.beginPath()
+                ctx.lineTo(captureloc.topLeftCorner.x - 5, captureloc.topLeftCorner.y - 5)
+                ctx.lineTo(captureloc.topRightCorner.x + 5, captureloc.topRightCorner.y - 5)
+                ctx.lineTo(captureloc.bottomRightCorner.x + 5, captureloc.bottomRightCorner.y + 5)
+                ctx.lineTo(captureloc.bottomLeftCorner.x - 5, captureloc.bottomLeftCorner.y + 5)
+                ctx.closePath();
+                ctx.stroke();
+            }
+        }, 10)
+    </script>
+</body>
+
+</html>
