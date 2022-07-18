@@ -24,7 +24,7 @@
     <div class="bar">
         <div class="baricons">
             <i on:click={setPage("home")} id="home" class="bi bi-house-fill" />
-            <i on:click={() => fetch("http://" + location.host + "/api/shutdown")} id="shutdown" class="bi bi-power" />
+            <i on:click={setPage("scanners")} class="bi bi-upc-scan" />
         </div>
         <span class="time">{time}</span>
     </div>
@@ -39,6 +39,10 @@
         align-items: center;
         justify-content: space-between;
         font-size: 50px;
+    }
+
+    .bi {
+        font-size: 40px;
     }
 
     .time {

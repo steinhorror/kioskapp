@@ -4,6 +4,7 @@
 	import Lager from "./pages/Lager.svelte";
 	import Buy from "./pages/Buy.svelte";
 	import Payment from "./pages/Payment.svelte";
+	import Scanners from "./pages/Scanners.svelte";
 
 	import { Prices } from "./Prices";
 	import { Kasse } from "./Kasse";
@@ -68,6 +69,8 @@
 		<Buy {prices} {setPage} {setRows} {setRabatt} {rows}/>
 	{:else if page == "pay"}
 		<Payment {rows} {setPage} {rabatt} {setRabatt} {kasse} {startsWith} />
+	{:else if page == "scanners"}
+		<Scanners />
 	{/if}
 </main>
 
