@@ -1,17 +1,18 @@
 const express = require("express");
 const fs = require("fs");
+const path = require("path");
 const app = express();
 
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.resolve(__dirname, "..", "..", "public")));
 app.use(express.json())
 
 app.post("/api/write", (req, res) => {
-    fs.writeFileSync(__dirname + "/database.json", JSON.stringify(req.body));
+    fs.writeFileSync(path.resolve(__dirname, "..", "..", "database.json"), JSON.stringify(req.body));
     res.json({ message: "Wrote content to file!"})
 })
 
 app.get("/api/read", (req, res) => {
-    res.sendFile(__dirname + "/database.json");
+    res.sendFile(path.resolve(__dirname, "..", "..", "database.json"));
 })
 
 app.get("/api/shutdown", (req, res) => {
